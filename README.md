@@ -1,7 +1,8 @@
 # To-Do application
-  [ ] User auth with firebase
-  [ ] Create To Do's
-  [ ] Use Firestore to store the user To Do's
+Simple To Do app with the following features
+ - [ ] User auth with firebase
+ - [ ] Create/Delete To Do's
+ - [ ] Use Firestore to store the user To Do's
 
 # Getting Started with Create React App
 

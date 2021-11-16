@@ -1,3 +1,8 @@
+# To-Do application
+  [ ] User auth with firebase
+  [ ] Create To Do's
+  [ ] Use Firestore to store the user To Do's
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

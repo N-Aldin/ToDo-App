@@ -1,8 +1,15 @@
 # To-Do application
-Simple To Do app with the following features
+Simple To Do app with the following features:
  - [ ] User auth with firebase
  - [ ] Create/Delete To Do's
  - [ ] Use Firestore to store the user To Do's
+
+ Features
+ - [ ] Home page with a list of To do
+    - Scrolling side to side cards
+ - [ ] To do creation
+    - By Day and week
+ - [ ] To do view to mark off To do's that are done
 
 # Getting Started with Create React App
 

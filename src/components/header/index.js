@@ -13,6 +13,9 @@ const NavBar = () => {
             <LogoText>AppNameHere</LogoText>
           </LinkWrap>
         </Container>
+
+        {/* Add hamburger menu here */}
+
         <NavMenu>
           <NavItem to='/' activeStyle>Home</NavItem>
           <NavItem to='/create' activeStyle>Create</NavItem>

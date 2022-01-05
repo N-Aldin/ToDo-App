@@ -77,5 +77,6 @@ export const Nav = Styled.nav`
   justify-content: space-evenly;
   box-shadow: 0 10px 10px -2px rgba(0,0,0,.3);
   background-color: #262626;
+  z-index: 10;
   height: 4rem;
 `

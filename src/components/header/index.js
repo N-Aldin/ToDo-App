@@ -15,11 +15,12 @@ const NavBar = () => {
         </Container>
 
         {/* Add hamburger menu here */}
+        {/* Likely using breakpoints */}
 
         <NavMenu>
           <NavItem to='/' activeStyle>Home</NavItem>
-          <NavItem to='/create' activeStyle>Create</NavItem>
-          <NavItem to='/todoView' activeStyle>My ToDo's</NavItem>
+          <NavItem to='/create' activeStyle>My To Do's</NavItem>
+          <NavItem to='/todoView' activeStyle>Create To Do's</NavItem>
           <NavItem to='/signup' activeStyle>Sign up</NavItem>
         </NavMenu>
         <Container>

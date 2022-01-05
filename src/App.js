@@ -9,11 +9,12 @@ import { useAuth } from "./hooks/firebase";
 const testAcc = { email: "test@gmail.com", password: "password123" };
 
 const App = () => {
-  const { signUp, signIn } = useAuth();
+  const { signUp, signIn, logout } = useAuth();
 
   const testAuth = async () => {
     try {
       await signIn(testAcc.email, testAcc.password);
+      // await logout();
     } catch (err) {
       alert(err);
     }

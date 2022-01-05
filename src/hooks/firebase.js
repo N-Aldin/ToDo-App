@@ -31,6 +31,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const signIn = (email, password) => {
+    setIsLoading(true);
+
     return signInWithEmailAndPassword(auth, email, password).then((result) => {
       console.log(result.user);
       setUser(result.user);
@@ -39,6 +41,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signUp = (email, password) => {
+    setIsLoading(true);
+
     return createUserWithEmailAndPassword(auth, email, password).then(
       (result) => {
         console.log(result.user);
@@ -48,8 +52,10 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const logOut = () => {
-    return signOut().then(() => {
+  const logout = () => {
+    setIsLoading(true);
+
+    return signOut(auth).then(() => {
       setUser(null);
       return true;
     });
@@ -59,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     user,
     signIn,
     signUp,
-    logOut,
+    logout,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

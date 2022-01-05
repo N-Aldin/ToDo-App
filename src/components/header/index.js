@@ -8,8 +8,14 @@ import {
   NavMenu,
   NavItem,
 } from "./header.styled";
+import { useAuth } from "../../hooks/firebase";
 
 const NavBar = () => {
+  const { user } = useAuth();
+
+  const logoutBtn = { color: "#000", backgroundColor: "#ff1000" };
+  const signInOutBtn = { color: "#000", backgroundColor: "#fff" };
+
   return (
     <Fade in={true} timeout={{ enter: 1200, exit: 1000 }}>
       <Nav>
@@ -30,17 +36,15 @@ const NavBar = () => {
           <NavItem to="/todoView">Create To Do's</NavItem>
           <NavItem to="/signup">Sign up</NavItem>
         </NavMenu>
+
         <Container>
-          <LinkWrap to="/login">
-            <Button
-              variant="contained"
-              style={{ color: "#000", backgroundColor: "#fff" }}
-            >
-              Sign in
+          <LinkWrap to={user ? "/" : "/login"}>
+            <Button variant="contained" style={user ? logoutBtn : signInOutBtn}>
+              {user ? "Logout" : "Sign In/Up"}
             </Button>
           </LinkWrap>
         </Container>
-        {/* Material UI to do logo that changes color if its on home page */}
+        {/* Material UI notes logo that changes color if its on home page */}
       </Nav>
     </Fade>
   );

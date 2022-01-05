@@ -1,12 +1,12 @@
-import Styled from 'styled-components'
-import { NavLink, Link } from 'react-router-dom'
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import Styled from "styled-components";
+import { NavLink, Link } from "react-router-dom";
+import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 
 export const LinkWrap = Styled(Link)`
   text-decoration: none;
   color: inherit;
   display: flex;
-`
+`;
 
 export const Container = Styled.div`
   display: flex;
@@ -15,15 +15,15 @@ export const Container = Styled.div`
   color: white;
   width: 25%;
   // background-color: red;
-`
+`;
 
 export const Logo = Styled(StickyNote2Icon)`
   margin-right: .5rem;
-`
+`;
 
 export const LogoText = Styled.h2`
   font-style: italic;
-`
+`;
 
 export const NavItem = Styled(NavLink)`
   display: flex;
@@ -62,14 +62,14 @@ export const NavItem = Styled(NavLink)`
   &.active {
     font-style: italic;
   }
-`
+`;
 
 export const NavMenu = Styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 50%;
   // background-color: red;
-`
+`;
 
 export const Nav = Styled.nav`
   display: flex;
@@ -79,4 +79,4 @@ export const Nav = Styled.nav`
   background-color: #262626;
   z-index: 10;
   height: 4rem;
-`
+`;

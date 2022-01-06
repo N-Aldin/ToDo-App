@@ -8,13 +8,26 @@ import {
   NavMenu,
   NavItem,
 } from "./header.styled";
-import { useAuth } from "../../hooks/firebase";
+import { useAuth } from "../../hooks/useAuth";
 
-const NavBar = () => {
-  const { user } = useAuth();
+const NavBar = ({ setOpenAuth }) => {
+  const { user, logout } = useAuth();
 
   const logoutBtn = { color: "#000", backgroundColor: "#ff1000" };
   const signInOutBtn = { color: "#000", backgroundColor: "#fff" };
+
+  const handleAuth = async () => {
+    if (user) {
+      try {
+        await logout();
+      } catch (err) {
+        alert(err);
+      }
+      return;
+    }
+
+    setOpenAuth(true);
+  };
 
   return (
     <Fade in={true} timeout={{ enter: 1200, exit: 1000 }}>
@@ -39,7 +52,11 @@ const NavBar = () => {
 
         <Container>
           <LinkWrap to={user ? "/" : "/login"}>
-            <Button variant="contained" style={user ? logoutBtn : signInOutBtn}>
+            <Button
+              variant="contained"
+              onClick={handleAuth}
+              style={user ? logoutBtn : signInOutBtn}
+            >
               {user ? "Logout" : "Sign In/Up"}
             </Button>
           </LinkWrap>

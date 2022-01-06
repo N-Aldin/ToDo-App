@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 // import './index.css';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { AuthProvider } from "./hooks/firebase";
+import { AuthProvider } from "./hooks/useAuth";
 
 ReactDOM.render(
   <React.StrictMode>

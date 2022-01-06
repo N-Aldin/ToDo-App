@@ -4,11 +4,13 @@ import { useState, useEffect, useContext } from "react";
 import { Typography } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
-import { useAuth } from "./hooks/firebase";
+import { useAuth } from "./hooks/useAuth";
+import AuthModal from "./components/authModal";
 
 const testAcc = { email: "test@gmail.com", password: "password123" };
 
 const App = () => {
+  const [openAuth, setOpenAuth] = useState(false);
   const { signUp, signIn, logout } = useAuth();
 
   const testAuth = async () => {
@@ -27,7 +29,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <NavBar />
+        <NavBar setOpenAuth={setOpenAuth} />
         <Layout>
           <Routes>
             <Route
@@ -54,6 +56,7 @@ const App = () => {
             />
             <Route path="/" element={<Typography>Home</Typography>} />
           </Routes>
+          <AuthModal openAuth={openAuth} setOpenAuth={setOpenAuth} />
         </Layout>
       </Router>
     </>

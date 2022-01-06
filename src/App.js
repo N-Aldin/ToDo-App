@@ -1,11 +1,11 @@
 import "./App.css";
-import NavBar from "./components/header";
+import NavBar from "./components/navBar";
 import { useState, useEffect, useContext } from "react";
 import { Typography } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import { useAuth } from "./hooks/useAuth";
-import AuthModal from "./components/authModal";
+import AuthDialog from "./components/authDialog";
 
 const testAcc = { email: "test@gmail.com", password: "password123" };
 
@@ -56,7 +56,7 @@ const App = () => {
             />
             <Route path="/" element={<Typography>Home</Typography>} />
           </Routes>
-          <AuthModal openAuth={openAuth} setOpenAuth={setOpenAuth} />
+          <AuthDialog openAuth={openAuth} setOpenAuth={setOpenAuth} />
         </Layout>
       </Router>
     </>

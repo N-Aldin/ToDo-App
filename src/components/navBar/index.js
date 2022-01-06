@@ -7,7 +7,7 @@ import {
   LogoText,
   NavMenu,
   NavItem,
-} from "./header.styled";
+} from "./navBar.styled";
 import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = ({ setOpenAuth }) => {

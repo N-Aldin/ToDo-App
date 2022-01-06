@@ -51,15 +51,13 @@ const NavBar = ({ setOpenAuth }) => {
         </NavMenu>
 
         <Container>
-          <LinkWrap to={user ? "/" : "/login"}>
-            <Button
-              variant="contained"
-              onClick={handleAuth}
-              style={user ? logoutBtn : signInOutBtn}
-            >
-              {user ? "Logout" : "Sign In/Up"}
-            </Button>
-          </LinkWrap>
+          <Button
+            variant="contained"
+            onClick={handleAuth}
+            style={user ? logoutBtn : signInOutBtn}
+          >
+            {user ? "Logout" : "Sign In/Up"}
+          </Button>
         </Container>
         {/* Material UI notes logo that changes color if its on home page */}
       </Nav>

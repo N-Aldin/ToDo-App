@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormHelperText,
+} from "@mui/material";
+import { InputLabel, Input } from "@mui/material";
 import { ButtonContainer, Button, AuthButtons } from "./authDialog.styled";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -8,29 +15,51 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [matchError, setMatchError] = useState(false);
 
-  const { signUp, signIn, logout } = useAuth();
+  const { user, signUp, signIn, logout } = useAuth();
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "backdropClick") return;
+
     setOpenAuth(false);
     setTimeout(() => {
       setConfirmPass(false);
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      setMatchError(false);
     }, 250);
   };
 
   const handleSignUp = async () => {
-    if (!openConfirmPass) setConfirmPass(true);
+    if (!openConfirmPass) {
+      setConfirmPass(true);
+      return;
+    }
 
-    // Verify fields have correct values
-    // Use states to get the values from the fields
-    // Send the signUp request
+    if (password !== confirmPassword) {
+      setMatchError(true);
+    }
+
+    // Firebase will provide verification for the data entered
+    try {
+      await signUp(email, password);
+      console.log(user);
+      handleClose();
+    } catch (err) {
+      alert(err);
+    }
   };
 
   const handleSignIn = async () => {
-    return;
+    try {
+      await signIn(email, password);
+      handleClose();
+      console.log(user);
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -60,22 +89,32 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
+            setMatchError(false);
           }}
         />
         {openConfirmPass && (
-          <TextField
-            autoFocus
-            margin="dense"
-            id="confirmPassword"
-            label="Confirm Password"
-            type="password"
-            fullWidth
-            variant="standard"
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
+          <>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              variant="standard"
+              value={confirmPassword}
+              aria-describedby="passwordsDontMatch"
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                setMatchError(false);
+              }}
+            />
+            {matchError && (
+              <FormHelperText error id="passwordsDontMatch" color>
+                Passwords don't match
+              </FormHelperText>
+            )}
+          </>
         )}
       </DialogContent>
       <ButtonContainer>

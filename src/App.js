@@ -12,19 +12,17 @@ const App = () => {
   const [openAuth, setOpenAuth] = useState(false);
 
   return (
-    <>
-      <Router>
-        <Layout>
-          <NavBar setOpenAuth={setOpenAuth} />
-          <Routes>
-            <Route path='/notes' element={<Notes></Notes>} />
-            <Route path='/about' element={<></>} />
-            <Route path='/' element={<Typography>Home</Typography>} />
-          </Routes>
-          <AuthDialog openAuth={openAuth} setOpenAuth={setOpenAuth} />
-        </Layout>
-      </Router>
-    </>
+    <Router>
+      <Layout>
+        <NavBar setOpenAuth={setOpenAuth} />
+        <Routes>
+          <Route path='/notes' element={<Notes></Notes>} />
+          <Route path='/about' element={<></>} />
+          <Route path='/' element={<Typography>Home</Typography>} />
+        </Routes>
+        <AuthDialog openAuth={openAuth} setOpenAuth={setOpenAuth} />
+      </Layout>
+    </Router>
   );
 };
 

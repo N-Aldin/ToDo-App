@@ -11,9 +11,9 @@ export const Drawer = Styled.div`
   display: flex;
   flex-direction: column; 
   background-color: white;
-  width: auto;
+  height: 10%;
+  max-height: 10%;
+  // width: 100%;
   min-width: 16rem;
-  height: 100%;
-//   height: calc(100vh-100%);
-//   overflow-y: scroll;
+  border-right: 1px solid;
 `;

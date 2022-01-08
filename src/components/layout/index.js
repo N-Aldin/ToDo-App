@@ -7,14 +7,11 @@ const Layout = ({ children }) => {
 };
 
 const Background = Styled(Box)`
-    // position: absolute;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    color: black;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  // background-color: red;
+  height: 100vh;
+  // flex-grow: 1;
 `;
 
 export default Layout;

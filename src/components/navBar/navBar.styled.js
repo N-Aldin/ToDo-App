@@ -80,6 +80,6 @@ export const Nav = Styled.nav`
   background-color: #262626;
   height: 4rem;
   min-height: 4rem;
-  width: 100%;
-  z-index: 100;
+  // width: 100vw;
+  // z-index: 100;
 `;

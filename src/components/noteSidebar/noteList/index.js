@@ -1,16 +1,11 @@
 import React from 'react';
 import { List } from '@mui/material';
 import NoteItem from './noteItem';
+import Styled from 'styled-components';
 
 function NoteList() {
   return (
-    <List
-      sx={{
-        'overflow-y': 'auto',
-        'overflow-x': 'hidden',
-      }}
-    >
-      {/* All the notes will be displayed here */}
+    <Notes>
       <NoteItem title='Title' modified='2022-01-07' />
       <NoteItem title='Title' modified='2022-01-07' />
       <NoteItem title='Title' modified='2022-01-07' />
@@ -23,14 +18,13 @@ function NoteList() {
       <NoteItem title='Title' modified='2022-01-07' />
       <NoteItem title='Title' modified='2022-01-07' />
       <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-    </List>
+    </Notes>
   );
 }
+
+const Notes = Styled(List)`
+  overflow-y: auto;
+  overflow-x: hidden;
+`;
 
 export default NoteList;

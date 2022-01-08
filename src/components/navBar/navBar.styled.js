@@ -1,6 +1,6 @@
-import Styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
-import StickyNote2Icon from "@mui/icons-material/StickyNote2";
+import Styled from 'styled-components';
+import { NavLink, Link } from 'react-router-dom';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
 export const LinkWrap = Styled(Link)`
   text-decoration: none;
@@ -72,10 +72,14 @@ export const NavMenu = Styled.div`
 `;
 
 export const Nav = Styled.nav`
+  position: static;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   box-shadow: 0 10px 10px -2px rgba(0,0,0,.3);
   background-color: #262626;
   height: 4rem;
+  min-height: 4rem;
+  width: 100%;
+  z-index: 100;
 `;

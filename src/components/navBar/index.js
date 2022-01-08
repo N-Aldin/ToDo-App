@@ -1,4 +1,4 @@
-import { Button, Fade } from "@mui/material";
+import { Button, Fade } from '@mui/material';
 import {
   Nav,
   Container,
@@ -7,14 +7,14 @@ import {
   LogoText,
   NavMenu,
   NavItem,
-} from "./navBar.styled";
-import { useAuth } from "../../hooks/useAuth";
+} from './navBar.styled';
+import { useAuth } from '../../hooks/useAuth';
 
 const NavBar = ({ setOpenAuth }) => {
   const { user, logout } = useAuth();
 
-  const logoutBtn = { color: "#000", backgroundColor: "#ff1000" };
-  const signInOutBtn = { color: "#000", backgroundColor: "#fff" };
+  const logoutBtn = { color: '#000', backgroundColor: '#ff1000' };
+  const signInOutBtn = { color: '#000', backgroundColor: '#fff' };
 
   const handleAuth = async () => {
     if (user) {
@@ -33,8 +33,8 @@ const NavBar = ({ setOpenAuth }) => {
     <Fade in={true} timeout={{ enter: 1200, exit: 1000 }}>
       <Nav>
         <Container>
-          <LinkWrap to="/">
-            <Logo fontSize="large" />
+          <LinkWrap to='/'>
+            <Logo fontSize='large' />
             {/* Add hover effect on letters to split apart - letter spacing */}
             <LogoText>AppNameHere</LogoText>
           </LinkWrap>
@@ -44,19 +44,20 @@ const NavBar = ({ setOpenAuth }) => {
         {/* Likely using breakpoints */}
 
         <NavMenu>
-          <NavItem to="/">Home</NavItem>
-          <NavItem to="/create">My To Do's</NavItem>
-          <NavItem to="/todoView">Create To Do's</NavItem>
-          <NavItem to="/signup">Sign up</NavItem>
+          <NavItem to='/'>Home</NavItem>
+          <NavItem to='/notes'>My Notes</NavItem>
+          <NavItem to='/about'>About</NavItem>
+          {/* <NavItem to='/todoView'>Create To Do's</NavItem> */}
+          {/* <NavItem to='/signup'>Sign up</NavItem> */}
         </NavMenu>
 
         <Container>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleAuth}
             style={user ? logoutBtn : signInOutBtn}
           >
-            {user ? "Logout" : "Sign In/Up"}
+            {user ? 'Logout' : 'Sign In/Up'}
           </Button>
         </Container>
         {/* Material UI notes logo that changes color if its on home page */}

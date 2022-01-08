@@ -6,7 +6,6 @@ import {
   DialogTitle,
   FormHelperText,
 } from "@mui/material";
-import { InputLabel, Input } from "@mui/material";
 import { ButtonContainer, Button, AuthButtons } from "./authDialog.styled";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -23,6 +22,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
     if (reason === "backdropClick") return;
 
     setOpenAuth(false);
+
     setTimeout(() => {
       setConfirmPass(false);
       setEmail("");
@@ -38,9 +38,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setMatchError(true);
-    }
+    if (password !== confirmPassword) setMatchError(true);
 
     // Firebase will provide verification for the data entered
     try {
@@ -48,7 +46,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
       console.log(user);
       handleClose();
     } catch (err) {
-      alert(err);
+      alert(err.message);
     }
   };
 
@@ -58,7 +56,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
       handleClose();
       console.log(user);
     } catch (err) {
-      alert(err);
+      alert(err.message);
     }
   };
 

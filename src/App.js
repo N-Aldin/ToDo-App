@@ -12,14 +12,14 @@ import { NotesContext } from './contexts/notesContext';
 const App = () => {
   const [openAuth, setOpenAuth] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [activeNote, setActiveNote] = useState({});
+  const [activeNote, setActiveNote] = useState();
 
   const { loggedIn } = useAuth();
 
   useEffect(() => {
     if (!loggedIn) {
       setNotes([]);
-      setActiveNote({});
+      setActiveNote();
     }
     // Fetch notes from firebase
     console.log('fetching notes');

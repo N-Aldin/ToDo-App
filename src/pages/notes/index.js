@@ -14,7 +14,7 @@ const Notes = () => {
 
 const Container = Styled.div`
   display: flex;
-  background-color: orange;
+  // background-color: orange;
   // height: 100%;
   // max-height: ;
   // flex-grow: 1;

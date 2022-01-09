@@ -1,43 +1,62 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Styled from 'styled-components';
 import { NotesContext } from '../../contexts/notesContext';
+import { stringify } from 'uuid';
 
 const Note = () => {
   const [title, setTitle] = useState('');
-  const [noteBody, setNoteBody] = useState('');
+  const [body, setBody] = useState('');
 
-  const notes = useContext(NotesContext);
+  const { activeNote, notes, setNotes } = useContext(NotesContext);
 
   useEffect(() => {
-    console.log(notes);
-  }, []);
+    if (!activeNote) return;
+
+    let note = {};
+
+    for (let i = 0; i < notes.length; ++i) {
+      if (activeNote === notes[i].id) {
+        note = notes[i];
+        break;
+      }
+    }
+
+    setTitle(note.title);
+    setBody(note.body);
+  }, [activeNote]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
 
-    clearTimeout(saveTitle);
+    // clearTimeout(saveTitle);
 
-    const saveTitle = setTimeout(() => {
-      // Send request to save
-    }, 750);
+    // const saveTitle = setTimeout(() => {
+    //   // Send request to save
+    // }, 750);
   };
 
   const handleNoteChange = (e) => {
-    setNoteBody(e.target.value);
+    setBody(e.target.value);
   };
 
   return (
     <Container>
-      <NoteTitle
-        placeholder='Note Title...'
-        value={title}
-        onChange={handleTitleChange}
-      ></NoteTitle>
-      <NoteBody
-        placeholder='Enter Notes Here...'
-        value={noteBody}
-        onChange={handleNoteChange}
-      ></NoteBody>
+      {activeNote ? (
+        <>
+          <NoteTitle
+            placeholder='Note Title...'
+            value={title}
+            onChange={handleTitleChange}
+          ></NoteTitle>
+          <NoteBody
+            placeholder='Enter Notes Here...'
+            value={body}
+            onChange={handleNoteChange}
+          ></NoteBody>
+        </>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

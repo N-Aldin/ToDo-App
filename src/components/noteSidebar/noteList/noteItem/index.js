@@ -4,9 +4,12 @@ import Styled from 'styled-components';
 import { NotesContext } from '../../../../contexts/notesContext';
 
 const NoteItem = ({ id, title, modified }) => {
-  const { setActiveNote } = useContext(NotesContext);
+  const { activeNote, setActiveNote } = useContext(NotesContext);
 
   const handleClick = () => {
+    console.log(
+      'This is the current active note: ' + JSON.stringify(activeNote)
+    );
     setActiveNote(id);
     console.log(id);
   };
@@ -14,7 +17,10 @@ const NoteItem = ({ id, title, modified }) => {
   return (
     <ListItem disablePadding>
       <NoteButton onClick={handleClick}>
-        <ListItemText primary={title} secondary={modified} />
+        <ListItemText
+          primary={title ? title : 'Undefined'}
+          secondary={modified}
+        />
       </NoteButton>
     </ListItem>
   );

@@ -20,7 +20,7 @@ const NoteSidebar = () => {
 
   const newNote = {
     id: uuid(),
-    title: 'Title',
+    title: '',
     body: '',
     modified: getDate(),
   };
@@ -30,9 +30,9 @@ const NoteSidebar = () => {
 
   const handleAddNote = () => {
     setNotes([newNote, ...notes]);
-    setActiveNote(newNote);
+    setActiveNote(newNote.id);
     console.log(notes);
-    console.log('Active Note: ' + activeNote);
+    console.log('Active Note: ' + JSON.stringify(activeNote));
     return;
   };
 

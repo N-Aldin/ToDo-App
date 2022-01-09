@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
 const Background = Styled(Box)`
   display: flex;
   flex-direction: column;
-  background-color: red;
+  // background-color: red;
   height: 100vh;
   // flex-grow: 1;
 `;

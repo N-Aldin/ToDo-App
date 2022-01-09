@@ -35,21 +35,33 @@ const Note = () => {
 
     clearTimeout(autoSave.current);
 
-    autoSave.current = setTimeout(() => {
-      handleSave();
-    }, 1000);
+    // autoSave.current = setTimeout(() => {
+    handleSave();
+    // }, 1000);
 
-    return () => {
-      clearTimeout(autoSave.current);
-      console.log('Unmount');
-      handleSave();
-    };
+    // return () => {
+    //   clearTimeout(autoSave.current);
+    //   console.log('Unmount');
+    //   handleSave();
+    // };
   }, [title, body]);
 
   const handleSave = () => {
     notes[notePos].title = title;
     notes[notePos].body = body;
+    notes[notePos].modified = getDate();
     setNotes([...notes]);
+  };
+
+  const getDate = () => {
+    const date = new Date();
+    let dateStr = '';
+
+    dateStr += date.toDateString();
+    dateStr +=
+      ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+    return dateStr;
   };
 
   const handleTitleChange = (e) => {

@@ -24,9 +24,8 @@ const Note = () => {
   }, [activeNote]);
 
   useEffect(() => {
-    if (!note && note !== 0) return;
+    if (!note) return;
 
-    console.log('Note number: ' + note);
     setTitle(note.title);
     setBody(note.body);
   }, [note]);
@@ -41,9 +40,9 @@ const Note = () => {
     }, 1000);
 
     return () => {
-      notes[notePos].title = title;
-      notes[notePos].body = body;
-      setNotes([...notes]);
+      clearTimeout(autoSave.current);
+      console.log('Unmount');
+      handleSave();
     };
   }, [title, body]);
 

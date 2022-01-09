@@ -17,7 +17,7 @@ const NoteItem = ({ id, title, modified }) => {
   return (
     <ListItem disablePadding>
       <NoteButton onClick={handleClick}>
-        <ListItemText
+        <NoteItemText
           primary={title ? title : 'Undefined'}
           secondary={modified}
         />
@@ -27,6 +27,11 @@ const NoteItem = ({ id, title, modified }) => {
 };
 
 const NoteButton = Styled(ListItemButton)`
+  max-width: 100%;
+`;
+
+const NoteItemText = Styled(ListItemText)`
+  overflow: hidden;
 `;
 
 export default NoteItem;

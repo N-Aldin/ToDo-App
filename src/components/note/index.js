@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import Styled from 'styled-components';
 import { NotesContext } from '../../contexts/notesContext';
+import { Container, NoteTitle, NoteBody } from './note.styled';
 
 const Note = () => {
   const [note, setNote] = useState();
   const [notePos, setNotePos] = useState();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const titleSave = useRef();
-  const bodySave = useRef();
   const autoSave = useRef();
 
   const { activeNote, notes, setNotes } = useContext(NotesContext);
@@ -23,9 +21,6 @@ const Note = () => {
         break;
       }
     }
-
-    // setTitle(notes[note].title);
-    // setBody(notes[note].body);
   }, [activeNote]);
 
   useEffect(() => {
@@ -42,11 +37,21 @@ const Note = () => {
     clearTimeout(autoSave.current);
 
     autoSave.current = setTimeout(() => {
+      handleSave();
+    }, 1000);
+
+    return () => {
       notes[notePos].title = title;
       notes[notePos].body = body;
       setNotes([...notes]);
-    }, 1000);
+    };
   }, [title, body]);
+
+  const handleSave = () => {
+    notes[notePos].title = title;
+    notes[notePos].body = body;
+    setNotes([...notes]);
+  };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -77,34 +82,5 @@ const Note = () => {
     </Container>
   );
 };
-
-const Container = Styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  // background-color: orange;
-`;
-
-const NoteTitle = Styled.input`
-  overflow: visible;
-  border: none;
-  border-bottom: 2px solid whitesmoke;
-  outline: none;
-  // width: 100%;
-  font-size: 4rem;
-  font-weight: bold;
-  padding: 1rem 0 1rem 1rem;
-`;
-
-const NoteBody = Styled.textarea`
-  outline: none; 
-  border: none; 
-  // width: 100%;
-  flex-grow: 1;
-  font-size: 1.5rem;
-  resize: none;
-  padding-left: 2rem;
-  padding-top: 1rem;
-`;
 
 export default Note;

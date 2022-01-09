@@ -1,4 +1,3 @@
-import react from 'react';
 import { Box } from '@mui/material';
 import Styled from 'styled-components';
 

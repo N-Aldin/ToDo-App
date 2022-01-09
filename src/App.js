@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/navBar';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout';

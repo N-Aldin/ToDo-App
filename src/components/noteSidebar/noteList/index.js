@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { List } from '@mui/material';
 import NoteItem from './noteItem';
 import Styled from 'styled-components';
@@ -6,6 +6,10 @@ import { NotesContext } from '../../../contexts/notesContext';
 
 function NoteList() {
   const { notes } = useContext(NotesContext);
+
+  useEffect(() => {
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+  }, [notes]);
 
   return (
     <Notes>

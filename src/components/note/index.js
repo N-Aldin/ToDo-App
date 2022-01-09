@@ -1,42 +1,65 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import Styled from 'styled-components';
 import { NotesContext } from '../../contexts/notesContext';
-import { stringify } from 'uuid';
 
 const Note = () => {
+  const [note, setNote] = useState();
+  const [notePos, setNotePos] = useState();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const titleSave = useRef();
+  const bodySave = useRef();
 
   const { activeNote, notes, setNotes } = useContext(NotesContext);
 
   useEffect(() => {
     if (!activeNote) return;
 
-    let note = {};
-
     for (let i = 0; i < notes.length; ++i) {
       if (activeNote === notes[i].id) {
-        note = notes[i];
+        setNote(notes[i]);
+        setNotePos(i);
         break;
       }
     }
 
+    // setTitle(notes[note].title);
+    // setBody(notes[note].body);
+  }, [activeNote]);
+
+  useEffect(() => {
+    if (!note && note !== 0) return;
+
+    console.log('Note number: ' + note);
     setTitle(note.title);
     setBody(note.body);
-  }, [activeNote]);
+  }, [note]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
 
-    // clearTimeout(saveTitle);
+    clearTimeout(titleSave.current);
 
-    // const saveTitle = setTimeout(() => {
-    //   // Send request to save
-    // }, 750);
+    titleSave.current = setTimeout(() => {
+      let noteArr = notes;
+      noteArr[notePos].title = title;
+      setNotes(noteArr);
+      console.log('Title saved');
+    }, 1000);
+
+    console.log('This should run first');
   };
 
   const handleNoteChange = (e) => {
     setBody(e.target.value);
+
+    clearTimeout(bodySave.current);
+
+    bodySave.current = setTimeout(() => {
+      let noteArr = notes;
+      noteArr[notePos].body = body;
+      setNotes(noteArr);
+    }, 1000);
   };
 
   return (

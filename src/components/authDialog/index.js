@@ -16,7 +16,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [matchError, setMatchError] = useState(false);
 
-  const { user, signUp, signIn, isLoading } = useAuth();
+  const { user, signUp, signIn } = useAuth();
 
   const handleClose = (event, reason) => {
     if (reason === 'backdropClick') return;

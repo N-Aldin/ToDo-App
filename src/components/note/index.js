@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { NotesContext } from '../../contexts/notesContext';
 import { Container, NoteTitle, NoteBody } from './note.styled';
 
@@ -7,7 +7,6 @@ const Note = () => {
   const [notePos, setNotePos] = useState();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const autoSave = useRef();
 
   const { activeNote, notes, setNotes } = useContext(NotesContext);
 
@@ -21,7 +20,7 @@ const Note = () => {
         break;
       }
     }
-  }, [activeNote]);
+  }, [activeNote, notes]);
 
   useEffect(() => {
     if (!note) return;
@@ -31,22 +30,13 @@ const Note = () => {
   }, [note]);
 
   useEffect(() => {
-    if (!activeNote) return;
-
-    clearTimeout(autoSave.current);
-
-    // autoSave.current = setTimeout(() => {
     handleSave();
-    // }, 1000);
-
-    // return () => {
-    //   clearTimeout(autoSave.current);
-    //   console.log('Unmount');
-    //   handleSave();
-    // };
   }, [title, body]);
 
   const handleSave = () => {
+    if (!activeNote) return;
+    if (title === note.title && body === note.body) return;
+
     notes[notePos].title = title;
     notes[notePos].body = body;
     notes[notePos].modified = getDate();

@@ -7,6 +7,7 @@ const Notes = () => {
   return (
     <Container>
       <NoteSidebar />
+      {console.log('hello')}
       <Note />
     </Container>
   );

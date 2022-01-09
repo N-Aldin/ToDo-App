@@ -6,6 +6,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  setDoc,
+  doc,
+  getDocs,
+  getDoc,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,9 +26,11 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const AuthContext = createContext(null);
-
 const auth = getAuth(app);
+const db = getFirestore(app);
+const colRef = collection(db, 'users');
+
+const AuthContext = createContext(null);
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -34,12 +44,21 @@ export const AuthProvider = ({ children }) => {
   const signIn = (email, password) => {
     setIsLoading(true);
 
-    return signInWithEmailAndPassword(auth, email, password).then((result) => {
-      console.log(result.user);
-      setUser(result.user);
-      setLoggedIn(true);
-      return true;
-    });
+    return signInWithEmailAndPassword(auth, email, password).then(
+      async (cred) => {
+        const docRef = doc(colRef, cred.user.uid);
+
+        await getDoc(docRef).then((result) => {
+          console.log('Here is the current users document');
+          console.log(result.data());
+          cred.user.notes = result.data().notes;
+        });
+        console.log(cred.user);
+        setUser(cred.user);
+        setLoggedIn(true);
+        return true;
+      }
+    );
   };
 
   const signUp = (email, password) => {
@@ -47,9 +66,14 @@ export const AuthProvider = ({ children }) => {
 
     return createUserWithEmailAndPassword(auth, email, password).then(
       (result) => {
+        result.user.notes = [];
         console.log(result.user);
         setUser(result.user);
         setLoggedIn(true);
+
+        setDoc(doc(colRef, result.user.uid), {
+          notes: [],
+        });
         return true;
       }
     );
@@ -58,15 +82,20 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsLoading(true);
 
-    return signOut(auth).then(() => {
-      setUser(null);
-      setLoggedIn(false);
-      return true;
+    setDoc(doc(colRef, user.uid), {
+      notes: user.notes,
+    }).then(() => {
+      signOut(auth).then(() => {
+        setLoggedIn(false);
+        setUser(null);
+        return true;
+      });
     });
   };
 
   const values = {
     user,
+    setUser,
     signIn,
     signUp,
     logout,

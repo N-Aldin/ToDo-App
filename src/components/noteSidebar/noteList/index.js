@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { List } from '@mui/material';
 import NoteItem from './noteItem';
 import Styled from 'styled-components';
+import { NotesContext } from '../../../contexts/notesContext';
 
 function NoteList() {
+  const { notes } = useContext(NotesContext);
+
   return (
     <Notes>
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
-      <NoteItem title='Title' modified='2022-01-07' />
+      {notes.map((note) => {
+        return (
+          <NoteItem
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            modified={note.modified}
+          />
+        );
+      })}
     </Notes>
   );
 }

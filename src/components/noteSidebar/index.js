@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import { Button, Drawer } from './noteSidebar.styled';
 import { Button as btn } from '@mui/material';
 import NoteList from './noteList';
 import Styled from 'styled-components';
+import { NotesContext } from '../../contexts/notesContext';
+import { v4 as uuid } from 'uuid';
 
 const NoteSidebar = () => {
+  const getDate = () => {
+    const date = new Date();
+    let dateStr = '';
+
+    dateStr += date.toDateString();
+    dateStr +=
+      ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+    return dateStr;
+  };
+
+  const newNote = {
+    id: uuid(),
+    title: 'Title',
+    body: '',
+    modified: getDate(),
+  };
+
+  const { notes, setNotes, setActiveNote, activeNote } =
+    useContext(NotesContext);
+
+  const handleAddNote = () => {
+    setNotes([newNote, ...notes]);
+    setActiveNote(newNote);
+    console.log(notes);
+    console.log('Active Note: ' + activeNote);
+    return;
+  };
+
   return (
     <Drawer>
-      <Button variant='contained'>Add Note</Button>
-
+      <Button variant='contained' onClick={handleAddNote}>
+        Add Note
+      </Button>
       <hr />
       <NoteList />
     </Drawer>

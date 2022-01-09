@@ -7,18 +7,19 @@ const Notes = () => {
   return (
     <Container>
       <NoteSidebar />
-      {/* <Note /> */}
+      <Note />
     </Container>
   );
 };
 
 const Container = Styled.div`
   display: flex;
-  // background-color: orange;
+  background-color: orange;
   // height: 100%;
   // max-height: ;
+  // flex-grow: 1;
+  height: calc(100vh - 4rem);
   max-height: calc(100vh - 4rem);
-  flex-grow: 1;
 `;
 
 export default Notes;

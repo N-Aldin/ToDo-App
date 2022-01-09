@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
-import { initializeApp } from "firebase/app";
+import React, { createContext, useContext, useState } from 'react';
+import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -29,6 +29,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const signIn = (email, password) => {
     setIsLoading(true);
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password).then((result) => {
       console.log(result.user);
       setUser(result.user);
+      setLoggedIn(true);
       return true;
     });
   };
@@ -47,6 +49,7 @@ export const AuthProvider = ({ children }) => {
       (result) => {
         console.log(result.user);
         setUser(result.user);
+        setLoggedIn(true);
         return true;
       }
     );
@@ -57,6 +60,7 @@ export const AuthProvider = ({ children }) => {
 
     return signOut(auth).then(() => {
       setUser(null);
+      setLoggedIn(false);
       return true;
     });
   };
@@ -66,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     signIn,
     signUp,
     logout,
+    loggedIn,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

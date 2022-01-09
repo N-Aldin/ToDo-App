@@ -7,10 +7,6 @@ import { NotesContext } from '../../../contexts/notesContext';
 function NoteList() {
   const { notes } = useContext(NotesContext);
 
-  useEffect(() => {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-  }, [notes]);
-
   return (
     <Notes>
       {notes.map((note) => {

@@ -9,6 +9,7 @@ const Note = () => {
   const [body, setBody] = useState('');
   const titleSave = useRef();
   const bodySave = useRef();
+  const autoSave = useRef();
 
   const { activeNote, notes, setNotes } = useContext(NotesContext);
 
@@ -35,31 +36,24 @@ const Note = () => {
     setBody(note.body);
   }, [note]);
 
+  useEffect(() => {
+    if (!activeNote) return;
+
+    clearTimeout(autoSave.current);
+
+    autoSave.current = setTimeout(() => {
+      notes[notePos].title = title;
+      notes[notePos].body = body;
+      setNotes([...notes]);
+    }, 1000);
+  }, [title, body]);
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
-
-    clearTimeout(titleSave.current);
-
-    titleSave.current = setTimeout(() => {
-      let noteArr = notes;
-      noteArr[notePos].title = title;
-      setNotes(noteArr);
-      console.log('Title saved');
-    }, 1000);
-
-    console.log('This should run first');
   };
 
   const handleNoteChange = (e) => {
     setBody(e.target.value);
-
-    clearTimeout(bodySave.current);
-
-    bodySave.current = setTimeout(() => {
-      let noteArr = notes;
-      noteArr[notePos].body = body;
-      setNotes(noteArr);
-    }, 1000);
   };
 
   return (

@@ -39,7 +39,6 @@ const App = () => {
 
     // Updates the database in 10s intervals after notes has changed
     updateDB.current = setTimeout(() => {
-      if (!loggedIn) return; // In case user logs out before updateUser is called
       updateUser(notes);
     }, 10000);
   }, [notes]);

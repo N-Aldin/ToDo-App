@@ -38,12 +38,9 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const signIn = (email, password) => {
-    setIsLoading(true);
-
     return signInWithEmailAndPassword(auth, email, password).then(
       async (cred) => {
         const docRef = doc(colRef, cred.user.uid);
@@ -62,8 +59,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signUp = (email, password) => {
-    setIsLoading(true);
-
     return createUserWithEmailAndPassword(auth, email, password).then(
       (result) => {
         result.user.notes = [];
@@ -87,8 +82,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setIsLoading(true);
-
     setDoc(doc(colRef, user.uid), {
       notes: user.notes,
     }).then(() => {

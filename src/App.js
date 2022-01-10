@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/navBar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout';
 import { useAuth } from './hooks/useAuth';
@@ -13,8 +13,9 @@ const App = () => {
   const [openAuth, setOpenAuth] = useState(false);
   const [notes, setNotes] = useState([]);
   const [activeNote, setActiveNote] = useState();
+  const updateDB = useRef();
 
-  const { loggedIn, user, setUser } = useAuth();
+  const { loggedIn, user, setUser, updateUser } = useAuth();
 
   useEffect(() => {
     if (!loggedIn) {
@@ -24,17 +25,26 @@ const App = () => {
     }
 
     setNotes(user.notes);
-    // Fetch notes from firebase
-    console.log('fetching notes');
   }, [loggedIn]);
 
   useEffect(() => {
     if (!loggedIn) return;
     setUser({ ...user, notes });
+
+    // Call to update user with the updated notes
+    // This is done since setUser is a promise that won't necessairly
+    // be done
+
+    clearTimeout(updateDB.current);
+
+    // Updates the database in 10s intervals after notes has changed
+    updateDB.current = setTimeout(() => {
+      if (!loggedIn) return; // In case user logs out before updateUser is called
+      updateUser(notes);
+    }, 10000);
   }, [notes]);
 
   useEffect(() => {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
     console.log(user);
   }, [user]);
 

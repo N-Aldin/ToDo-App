@@ -79,6 +79,13 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
+  const updateUser = (data) => {
+    if (!loggedIn) return;
+    setDoc(doc(colRef, user.uid), {
+      notes: data,
+    });
+  };
+
   const logout = () => {
     setIsLoading(true);
 
@@ -99,6 +106,7 @@ export const AuthProvider = ({ children }) => {
     signIn,
     signUp,
     logout,
+    updateUser,
     loggedIn,
   };
 

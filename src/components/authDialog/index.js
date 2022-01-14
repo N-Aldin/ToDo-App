@@ -46,7 +46,7 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
     isLoading(true);
     try {
       await signUp(email, password);
-      console.log(user);
+      // console.log(user);
       handleClose();
       isLoading(false);
     } catch (err) {
@@ -55,21 +55,21 @@ const AuthDialog = ({ openAuth, setOpenAuth }) => {
   };
 
   const handleSignIn = async () => {
-    console.log('SIGN IN');
+    // console.log('SIGN IN');
     isLoading(true);
 
     try {
       await signIn(email, password);
-      console.log(user);
+      // console.log(user);
       handleClose();
       isLoading(false);
     } catch (err) {
       alert(err.message);
     }
   };
-  console.log('Should the dialog for auth be open');
-  console.log('Loading: ' + loading);
-  console.log('openAuth: ' + openAuth);
+  // console.log('Should the dialog for auth be open');
+  // console.log('Loading: ' + loading);
+  // console.log('openAuth: ' + openAuth);
   console.log(openAuth || loading ? true : false);
   return (
     <Dialog

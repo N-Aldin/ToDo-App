@@ -7,7 +7,6 @@ const Notes = () => {
   return (
     <Container>
       <NoteSidebar />
-      {console.log('hello')}
       <Note />
     </Container>
   );
@@ -15,10 +14,6 @@ const Notes = () => {
 
 const Container = Styled.div`
   display: flex;
-  // background-color: orange;
-  // height: 100%;
-  // max-height: ;
-  // flex-grow: 1;
   height: calc(100vh - 4rem);
   max-height: calc(100vh - 4rem);
 `;

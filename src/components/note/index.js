@@ -12,7 +12,6 @@ const Note = () => {
 
   useEffect(() => {
     if (!activeNote) return;
-
     for (let i = 0; i < notes.length; ++i) {
       if (activeNote === notes[i].id) {
         setNote(notes[i]);
@@ -33,8 +32,13 @@ const Note = () => {
     handleSave();
   }, [title, body]);
 
+  useEffect(() => {
+    console.log('There should be an active note');
+    console.log(activeNote);
+  }, []);
+
   const handleSave = () => {
-    if (!activeNote) return;
+    if (!activeNote || !note) return;
     if (title === note.title && body === note.body) return;
 
     notes[notePos].title = title;

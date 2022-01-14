@@ -14,6 +14,5 @@ export const Drawer = Styled.div`
   height: 100%;
   min-width: 16rem;
   width: 18rem;
-  max-width: 20rem !important;
-  border-right: 1px solid;
+  // border-right: 1px solid;
 `;

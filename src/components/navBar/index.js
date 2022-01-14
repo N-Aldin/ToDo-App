@@ -36,7 +36,7 @@ const NavBar = ({ setOpenAuth }) => {
           <LinkWrap to='/'>
             <Logo fontSize='large' />
             {/* Add hover effect on letters to split apart - letter spacing */}
-            <LogoText>AppNameHere</LogoText>
+            <LogoText>PaperNote</LogoText>
           </LinkWrap>
         </Container>
 

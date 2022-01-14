@@ -39,7 +39,7 @@ const NoteSidebar = () => {
       <Button variant='contained' onClick={handleAddNote}>
         Add Note
       </Button>
-      <hr />
+      {/* <hr /> */}
       <NoteList />
     </Drawer>
   );
